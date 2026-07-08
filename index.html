@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forever & Always — Our Love Story</title>
+<meta name="description" content="A premium, cinematic love story website." />
+
+<!-- Google Fonts: Playfair Display (display serif) + Poppins (body) + Great Vibes (script accent) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,600&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================= -->
+<!-- PREMIUM LOADING SCREEN        -->
+<!-- ============================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-galaxy">
+    <div class="loader-ring"></div>
+    <div class="loader-heart">
+      <svg viewBox="0 0 32 29" width="42" height="38"><path d="M16 28.5C16 28.5 1 19.5 1 9.5C1 4.5 5 1 9.5 1C12.5 1 15 2.5 16 5C17 2.5 19.5 1 22.5 1C27 1 31 4.5 31 9.5C31 19.5 16 28.5 16 28.5Z"/></svg>
+    </div>
+  </div>
+  <p class="loader-text">gathering the stars for you<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+</div>
+
+<!-- ============================= -->
+<!-- CURSOR EFFECTS LAYER          -->
+<!-- ============================= -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- ============================= -->
+<!-- AMBIENT BACKGROUND LAYERS     -->
+<!-- ============================= -->
+<div class="bg-layer" aria-hidden="true">
+  <div class="aurora"></div>
+  <canvas id="starsCanvas"></canvas>
+  <div id="shootingStars" class="shooting-stars"></div>
+  <div id="petalsContainer" class="petals-container"></div>
+  <div id="heartsContainer" class="hearts-container"></div>
+  <div id="particlesContainer" class="particles-container"></div>
+</div>
+
+<!-- ============================= -->
+<!-- FIREWORKS + CONFETTI CANVASES -->
+<!-- ============================= -->
+<canvas id="fireworksCanvas" class="fx-canvas" aria-hidden="true"></canvas>
+<canvas id="confettiCanvas" class="fx-canvas" aria-hidden="true"></canvas>
+
+<!-- ============================= -->
+<!-- TOAST NOTIFICATIONS           -->
+<!-- ============================= -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- ============================= -->
+<!-- NAVIGATION                    -->
+<!-- ============================= -->
+<header class="navbar glass" id="navbar">
+  <a href="#hero" class="brand">
+    <span class="brand-icon">✦</span>
+    <span class="brand-text">Evermore</span>
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#hero">Home</a>
+    <a href="#timeline">Our Story</a>
+    <a href="#letter">Love Letter</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#music">Music</a>
+    <a href="#proposal">Forever</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button id="themeToggle" class="icon-btn" aria-label="Toggle dark and light mode" title="Toggle theme">
+      <span class="theme-icon sun">☀</span>
+      <span class="theme-icon moon">☾</span>
+    </button>
+    <button id="navToggle" class="nav-burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================= -->
+  <!-- HERO SECTION                  -->
+  <!-- ============================= -->
+  <section id="hero" class="hero">
+    <div class="hero-content reveal">
+      <p class="eyebrow" id="dynamicGreeting">Good evening, my love</p>
+      <h1 class="hero-title">
+        <span class="gradient-text">Every Star</span><br />
+        Remembers <span class="script-text">Us</span>
+      </h1>
+      <p class="hero-subtitle">
+        A little universe built from every moment I've fallen for you all over again —
+        <span id="theirNameHero">Ananya</span>, this one is yours.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#timeline" class="btn btn-primary">
+          <span>Begin Our Story</span>
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </a>
+        <button class="btn btn-ghost" id="surpriseBtn">
+          <span>Open a Surprise</span> ✨
+        </button>
+      </div>
+
+      <div class="countdown glass" id="countdownBox">
+        <p class="countdown-label" id="countdownLabel">Counting down to our anniversary</p>
+        <div class="countdown-grid">
+          <div class="countdown-unit"><span id="cdDays">00</span><small>Days</small></div>
+          <div class="countdown-unit"><span id="cdHours">00</span><small>Hours</small></div>
+          <div class="countdown-unit"><span id="cdMinutes">00</span><small>Minutes</small></div>
+          <div class="countdown-unit"><span id="cdSeconds">00</span><small>Seconds</small></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="scroll-hint" id="scrollHint" aria-label="Scroll down">
+      <span></span>
+    </button>
+  </section>
+
+  <!-- ============================= -->
+  <!-- ANIMATED LOVE QUOTES          -->
+  <!-- ============================= -->
+  <section class="quotes-section reveal">
+    <div class="quote-wrap glass">
+      <svg class="quote-mark" viewBox="0 0 24 24" width="34" height="34"><path d="M7 7h4v4c0 3-2 5-5 5v-2c1.5 0 3-1 3-3H7V7zm10 0h4v4c0 3-2 5-5 5v-2c1.5 0 3-1 3-3h-2V7z" fill="currentColor"/></svg>
+      <p class="quote-text" id="quoteText">Loading...</p>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- MEMORY TIMELINE               -->
+  <!-- ============================= -->
+  <section id="timeline" class="timeline-section">
+    <h2 class="section-title reveal"><span class="gradient-text">Our Timeline</span></h2>
+    <p class="section-subtitle reveal">Every date, every detail, kept safe right here.</p>
+
+    <div class="timeline" id="timelineList"><!-- populated by JS --></div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- LOVE LETTER SECTION           -->
+  <!-- ============================= -->
+  <section id="letter" class="letter-section">
+    <h2 class="section-title reveal"><span class="gradient-text">A Letter, Just for You</span></h2>
+    <p class="section-subtitle reveal">Click the envelope. Read it slow.</p>
+
+    <div class="envelope-wrap reveal">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="letter-paper" id="letterPaper">
+          <p class="letter-signature-top">To my <span id="theirNameLetter">Ananya</span>,</p>
+          <p class="letter-body" id="typewriterText"></p>
+          <p class="letter-signature">Always yours,<br /><span class="script-text" id="myNameLetter">Arjun</span></p>
+        </div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-heart-seal">
+          <svg viewBox="0 0 32 29" width="20" height="18"><path d="M16 28.5C16 28.5 1 19.5 1 9.5C1 4.5 5 1 9.5 1C12.5 1 15 2.5 16 5C17 2.5 19.5 1 22.5 1C27 1 31 4.5 31 9.5C31 19.5 16 28.5 16 28.5Z"/></svg>
+        </div>
+      </div>
+      <p class="envelope-hint" id="envelopeHint">tap to open</p>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- PREMIUM GALLERY               -->
+  <!-- ============================= -->
+  <section id="gallery" class="gallery-section">
+    <h2 class="section-title reveal"><span class="gradient-text">Moments We Made</span></h2>
+    <p class="section-subtitle reveal">A little museum of us.</p>
+
+    <div class="gallery-controls reveal">
+      <button class="btn btn-ghost small" id="slideshowToggle">▶ Auto Slideshow</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"><!-- populated by JS --></div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image">›</button>
+  </div>
+
+  <!-- ============================= -->
+  <!-- MUSIC PLAYER                  -->
+  <!-- ============================= -->
+  <section id="music" class="music-section">
+    <h2 class="section-title reveal"><span class="gradient-text">Our Playlist</span></h2>
+    <p class="section-subtitle reveal">The songs that sound like you.</p>
+
+    <div class="music-player glass reveal">
+      <div class="music-art" id="musicArt">
+        <div class="vinyl">
+          <div class="vinyl-hole"></div>
+        </div>
+      </div>
+
+      <div class="music-info">
+        <h3 id="songTitle">Song Title</h3>
+        <p id="songArtist">Artist Name</p>
+
+        <div class="progress-wrap">
+          <span id="currentTime">0:00</span>
+          <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1" aria-label="Song progress" />
+          <span id="durationTime">0:00</span>
+        </div>
+
+        <div class="music-controls">
+          <button id="prevSong" class="icon-btn" aria-label="Previous song">⏮</button>
+          <button id="playPause" class="icon-btn play-btn" aria-label="Play or pause">▶</button>
+          <button id="nextSong" class="icon-btn" aria-label="Next song">⏭</button>
+          <div class="volume-wrap">
+            <span>🔊</span>
+            <input type="range" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="playlist" id="playlist"><!-- populated by JS --></ul>
+    <audio id="audioPlayer" preload="metadata"></audio>
+  </section>
+
+  <!-- ============================= -->
+  <!-- PROPOSAL SECTION              -->
+  <!-- ============================= -->
+  <section id="proposal" class="proposal-section">
+    <div class="proposal-content reveal">
+      <p class="eyebrow">One last question</p>
+      <h2 class="proposal-title gradient-text">Will You Stay Forever?</h2>
+      <p class="proposal-text">
+        Every star in this little sky, every petal, every song — they all lead here.
+        There's no version of my future that doesn't have you in it.
+      </p>
+      <button class="btn btn-primary btn-large" id="proposalBtn">
+        <span>Yes, Forever</span> 💍
+      </button>
+      <div class="proposal-answer" id="proposalAnswer" hidden>
+        <p class="gradient-text answer-text">He said yes. ✨</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================= -->
+<!-- SURPRISE POPUP MODAL          -->
+<!-- ============================= -->
+<div class="modal-overlay" id="surpriseModal" aria-hidden="true">
+  <div class="modal glass">
+    <button class="modal-close" data-close-modal>✕</button>
+    <div class="modal-icon">🎁</div>
+    <h3>A Little Surprise</h3>
+    <p id="surpriseMessage">Loading a surprise for you...</p>
+    <button class="btn btn-primary small" id="surpriseFireworks">Light Up the Sky</button>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MEMORY POPUP MODAL            -->
+<!-- ============================= -->
+<div class="modal-overlay" id="memoryModal" aria-hidden="true">
+  <div class="modal glass memory-modal">
+    <button class="modal-close" data-close-modal>✕</button>
+    <div class="memory-modal-img">
+      <img id="memoryModalImg" src="" alt="" />
+    </div>
+    <h3 id="memoryModalTitle"></h3>
+    <p class="memory-modal-date" id="memoryModalDate"></p>
+    <p id="memoryModalDesc"></p>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- LUXURY FOOTER                 -->
+<!-- ============================= -->
+<footer class="footer">
+  <div class="footer-glow" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <p class="footer-brand">✦ Evermore ✦</p>
+    <p class="footer-quote">"In all the world, there is no heart for me like yours."</p>
+    <p class="footer-names"><span id="footerName1">Arjun</span> &amp; <span id="footerName2">Ananya</span></p>
+    <p class="footer-copy">Made with <span class="footer-heart">♥</span> and a thousand tiny memories</p>
+  </div>
+</footer>
+
+<!-- ============================= -->
+<!-- BACK TO TOP                   -->
+<!-- ============================= -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<!-- ============================= -->
+<!-- KEYBOARD SHORTCUTS HINT       -->
+<!-- ============================= -->
+<div class="shortcuts-hint" id="shortcutsHint">
+  <button class="shortcuts-toggle" id="shortcutsToggle" aria-label="Keyboard shortcuts">⌨</button>
+  <div class="shortcuts-panel glass" id="shortcutsPanel">
+    <h4>Keyboard Shortcuts</h4>
+    <ul>
+      <li><kbd>Space</kbd> Play / Pause music</li>
+      <li><kbd>→</kbd> Next song</li>
+      <li><kbd>←</kbd> Previous song</li>
+      <li><kbd>T</kbd> Toggle theme</li>
+      <li><kbd>Esc</kbd> Close popups</li>
+    </ul>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
